@@ -4,15 +4,14 @@ defmodule GiocciPicoExample do
   """
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> GiocciPicoExample.hello()
-      :world
-
   """
-  def hello do
-    :world
+  def start do
+    IO.puts("""
+    =========================
+    This is GiocciPicoExample
+    =========================
+    """)
+
+    :ok
   end
 end

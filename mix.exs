@@ -7,8 +7,22 @@ defmodule GiocciPicoExample.MixProject do
       version: "0.1.0",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      atomvm: [
+        start: GiocciPicoExample,
+        flash_offset: 0x290000
+      ],
+      aliases: [
+        flash: [
+          "atomvm.packbeam",
+          "atomvm.esp32.flash --port /dev/ttyACM0 --baud 921600"
+        ]
+      ]
     ]
+  end
+
+  def cli do
+    [default_target: :avm_esp32]
   end
 
   # Run "mix help compile.app" to learn about applications.
@@ -21,8 +35,9 @@ defmodule GiocciPicoExample.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:giocci_pico, "== 0.7.0-alpha.1"},
+      {:exatomvm, github: "atomvm/exatomvm", runtime: false, override: true},
+      {:atomvm, "~> 0.7.0-beta.0", runtime: false}
     ]
   end
 end
