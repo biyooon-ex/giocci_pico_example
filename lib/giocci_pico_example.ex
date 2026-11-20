@@ -29,20 +29,19 @@ defmodule GiocciPicoExample do
     :ok = connect_wifi(ssid, psk)
 
     # Prepare ZenohexPico
+    connect_to = "tcp/#{@zenohd_ipv4_address}:7447"
     {:ok, config} = ZenohexPico.Config.default()
-    {:ok, config} = ZenohexPico.Config.insert(config, :mode, "client")
+    {:ok, config} = ZenohexPico.Config.insert(config, :connect, connect_to)
 
-    {:ok, config} =
-      ZenohexPico.Config.insert(config, :connect, "tcp/#{@zenohd_ipv4_address}:7447")
+    # Start GiocciPico
+    children = [
+      {GiocciPico.Supervisor,
+       zenohex_pico_config: config, client_name: @client_name, key_prefix: ""}
+    ]
 
-    # Start GiocciPico.Supervisor
-    {:ok, _pid} =
-      GiocciPico.Supervisor.start_link(
-        zenohex_pico_config: config,
-        client_name: @client_name,
-        key_prefix: ""
-      )
+    {:ok, _pid} = Supervisor.start_link(children, strategy: :one_for_one)
 
+    # Call each functions
     :ok = GiocciPico.register_client(@relay_name)
 
     :ok = GiocciPico.save_module(@relay_name, GiocciPicoExample.BasicCalc)

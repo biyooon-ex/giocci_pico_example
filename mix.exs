@@ -35,7 +35,7 @@ defmodule GiocciPicoExample.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:giocci_pico, "== 0.7.0-alpha.1"},
+      {:giocci_pico, "== 0.7.0-alpha.2"},
       {:exatomvm, github: "atomvm/exatomvm", runtime: false, override: true},
       {:atomvm, "~> 0.7.0-beta.0", runtime: false}
     ]
