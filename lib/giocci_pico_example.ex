@@ -7,7 +7,6 @@ defmodule GiocciPicoExample do
 
   @relay_name "giocci_relay"
   @client_name "giocci_pico_example"
-  @zenohd_ipv4_address "192.168.0.95"
 
   @doc """
   """
@@ -18,30 +17,30 @@ defmodule GiocciPicoExample do
     =========================
     """)
 
-    # Call these once to configure your Wi-Fi station.
+    # Run these once to configure your Wi-Fi station.
     # :esp.nvs_put_binary(:atomvm, :sta_ssid, "SSID")
     # :esp.nvs_put_binary(:atomvm, :sta_psk, "Password")
 
-    # Connect WiFi
+    # Connect to Wi-Fi
     {:ok, ssid} = :esp.nvs_fetch_binary(:atomvm, :sta_ssid)
     {:ok, psk} = :esp.nvs_fetch_binary(:atomvm, :sta_psk)
 
     :ok = connect_wifi(ssid, psk)
 
     # Prepare ZenohexPico
-    connect_to = "tcp/#{@zenohd_ipv4_address}:7447"
+    zenohd_connect_endpoint = "tcp/192.168.0.95:7447"
     {:ok, config} = ZenohexPico.Config.default()
-    {:ok, config} = ZenohexPico.Config.insert(config, :connect, connect_to)
+    {:ok, config} = ZenohexPico.Config.insert(config, :connect, zenohd_connect_endpoint)
 
     # Start GiocciPico
     children = [
-      {GiocciPico.Supervisor,
-       zenohex_pico_config: config, client_name: @client_name, key_prefix: ""}
+      {GiocciPico, zenohex_pico_config: config, client_name: @client_name, key_prefix: ""}
+      # Add your other GenServers and supervisors
     ]
 
     {:ok, _pid} = Supervisor.start_link(children, strategy: :one_for_one)
 
-    # Call each functions
+    # Call each function below
     :ok = GiocciPico.register_client(@relay_name)
 
     :ok = GiocciPico.save_module(@relay_name, GiocciPicoExample.BasicCalc)
