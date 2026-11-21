@@ -9,8 +9,7 @@ defmodule GiocciPicoExample.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       atomvm: [
-        start: GiocciPicoExample,
-        flash_offset: 0x290000
+        start: GiocciPicoExample
       ],
       aliases: [
         flash: [
