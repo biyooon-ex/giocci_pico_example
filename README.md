@@ -6,19 +6,19 @@ GiocciPicoExample releases follow Giocci's version numbers; use the matching Gio
 
 This explanation assumes that the GiocciRelay and GiocciEngine environment with your Zenoh router described in [Giocci's Quick Start](https://github.com/biyooon-ex/giocci_platform#quick-start) has already been deployed.
 
-## GiocciPico の使い方
+## Using GiocciPico
 
-GiocciPico の使い方を、次の2つのファイルに沿って説明します。
+The following two files illustrate how to use GiocciPico:
 
 1. [`mix.exs`](./mix.exs)
 2. [`lib/giocci_pico_example.ex`](./lib/giocci_pico_example.ex)
 
-### `mix.exs` の設定
+### Configuring `mix.exs`
 
-GiocciPico を使うための `mix.exs` の設定を説明します。
+The `mix.exs` file contains the configuration needed to use GiocciPico.
 
-まず、依存関係に `:giocci_pico` と、AtomVM 向けの開発に必要な
-[:exatomvm](https://github.com/atomvm/exatomvm) および `:atomvm` を追加します。
+First, add `:giocci_pico` and the dependencies needed for AtomVM development,
+[:exatomvm](https://github.com/atomvm/exatomvm) and `:atomvm`.
 
 ```elixir
   defp deps do
@@ -30,7 +30,7 @@ GiocciPico を使うための `mix.exs` の設定を説明します。
   end
 ```
 
-次に、`project/0` に AtomVM の起動モジュールと書き込み用のエイリアスを設定します。
+Next, configure the AtomVM start module and a flashing alias in `project/0`.
 
 ```elixir
   def project do
@@ -53,13 +53,13 @@ GiocciPico を使うための `mix.exs` の設定を説明します。
 ```
 
 > [!NOTE]
-> 書き込みの前に、[GiocciPico のセットアップ手順](https://github.com/biyooon-ex/giocci_platform/blob/main/apps/giocci_pico/README.md#セットアップ)に従って、
-> zenoh-pico を組み込んだ AtomVM の準備と `avm_deps` の配置を行ってください。
-> このサンプルは、`/dev/ttyACM0` を使用するデバイスのシリアルポートに合わせて変更したうえで、
-> `mix flash` でパックして ESP32 に書き込めます。
+> Before flashing, follow the [GiocciPico setup instructions](https://github.com/biyooon-ex/giocci_platform/blob/main/apps/giocci_pico/README.md#セットアップ)
+> to prepare an AtomVM build with zenoh-pico and place `avm_deps` in the project.
+> Change `/dev/ttyACM0` to your device's serial port, then run `mix flash`
+> to package and flash the sample to an ESP32.
 
-さらに、`cli/0` を追加して、デフォルトの Mix ターゲットを `:avm_esp32` に設定します。
-これにより、このプロジェクトでは通常、`export MIX_TARGET=avm_esp32` を実行する必要がありません。
+Finally, add `cli/0` to set the default Mix target to `:avm_esp32`.
+This normally removes the need to run `export MIX_TARGET=avm_esp32` for this project.
 
 ```elixir
   def cli do
@@ -67,18 +67,18 @@ GiocciPico を使うための `mix.exs` の設定を説明します。
   end
 ```
 
-### `lib/giocci_pico_example.ex` の処理
+### How `lib/giocci_pico_example.ex` works
 
-このファイルには、AtomVM の起動時に呼び出される `start/0` 関数を定義しています。
-`start/0` では、次の処理を行います。
+This file defines the `start/0` function called when AtomVM boots.
+The function performs the following steps:
 
-1. 保存済みの SSID とパスワードを読み込み、Wi-Fi に接続する
-2. ZenohexPico の接続先を設定する
-3. GiocciPico をスーパーバイザーの子プロセスとして起動する
-4. クライアントを登録し、`GiocciPicoExample.BasicCalc` を保存して、その関数を実行する
+1. Read the saved SSID and password and connect to Wi-Fi.
+2. Configure the ZenohexPico connection endpoint.
+3. Start GiocciPico as a child of a supervisor.
+4. Register the client, save `GiocciPicoExample.BasicCalc`, and execute its functions.
 
-実行前に、ファイル内の `:esp.nvs_put_binary/3` の例を使って、
-使用する Wi-Fi の SSID とパスワードをデバイスに保存してください。
-また、Zenoh ルーターの接続先とリレー名を利用環境に合わせて変更してください。
-SSID やパスワードをソースコードに記載した場合は、コミットしないようにしてください。
+Before running the sample, use the `:esp.nvs_put_binary/3` examples in the file
+to save your Wi-Fi SSID and password on the device.
+Also, change the Zenoh router endpoint and relay name to match your environment.
+If you put your SSID or password in the source code, do not commit them.
 
