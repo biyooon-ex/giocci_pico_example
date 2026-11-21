@@ -25,14 +25,12 @@ defmodule GiocciPicoExample.MixProject do
     [default_target: :avm_esp32]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger]
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
       {:giocci_pico, "== 0.7.0-alpha.2"},
