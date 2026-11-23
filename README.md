@@ -53,7 +53,7 @@ Next, configure the AtomVM start module and a flashing alias in `project/0`.
 ```
 
 > [!NOTE]
-> Before flashing, follow the [GiocciPico setup instructions](https://github.com/biyooon-ex/giocci_platform/blob/main/apps/giocci_pico/README.md#Usage)
+> Before flashing, follow the [GiocciPico setup instructions](https://github.com/biyooon-ex/giocci_platform/blob/main/apps/giocci_pico/README.md#usage)
 > to prepare an AtomVM build with zenoh-pico and place `avm_deps` in the project.
 > Change `/dev/ttyACM0` to your device's serial port, then run `mix flash`
 > to package and flash the sample to an ESP32.
