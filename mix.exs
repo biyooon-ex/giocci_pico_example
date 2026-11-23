@@ -4,7 +4,7 @@ defmodule GiocciPicoExample.MixProject do
   def project do
     [
       app: :giocci_pico_example,
-      version: "0.1.0",
+      version: "0.7.0-alpha.3",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       deps: deps(),

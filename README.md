@@ -23,7 +23,7 @@ First, add `:giocci_pico` and the dependencies needed for AtomVM development,
 ```elixir
   defp deps do
     [
-      {:giocci_pico, "== 0.7.0-alpha.2"},
+      {:giocci_pico, "== 0.7.0-alpha.3"},
       {:exatomvm, github: "atomvm/exatomvm", runtime: false, override: true},
       {:atomvm, "~> 0.7.0-beta.0", runtime: false}
     ]
