@@ -8,7 +8,7 @@ This explanation assumes that the GiocciRelay and GiocciEngine environment with 
 
 ## Using GiocciPico
 
-The following two files illustrate how to use GiocciPico:
+This section explains how to use GiocciPico by walking through the following two files:
 
 1. [`mix.exs`](./mix.exs)
 2. [`lib/giocci_pico_example.ex`](./lib/giocci_pico_example.ex)
