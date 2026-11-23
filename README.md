@@ -75,7 +75,7 @@ The function performs the following steps:
 1. Read the saved SSID and password and connect to Wi-Fi.
 2. Configure the ZenohexPico connection endpoint.
 3. Start GiocciPico as a child of a supervisor.
-4. Register the client, save `GiocciPicoExample.BasicCalc`, and execute its functions.
+4. Register the client, save `GiocciPicoExample.BasicCalc`, execute its functions and unregister the Client.
 
 Before running the sample, use the `:esp.nvs_put_binary/3` examples in the file
 to save your Wi-Fi SSID and password on the device.

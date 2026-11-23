@@ -50,6 +50,8 @@ defmodule GiocciPicoExample do
     8.0 = GiocciPico.exec_func(@relay_name, {GiocciPicoExample.BasicCalc, :power, [2, 3]})
     5 = GiocciPico.exec_func(@relay_name, {GiocciPicoExample.BasicCalc, :fib, [5]})
 
+    :ok = GiocciPico.unregister_client(@relay_name)
+
     :ok
   end
 
