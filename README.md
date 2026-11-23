@@ -53,7 +53,7 @@ Next, configure the AtomVM start module and a flashing alias in `project/0`.
 ```
 
 > [!NOTE]
-> Before flashing, follow the [GiocciPico setup instructions](https://github.com/biyooon-ex/giocci_platform/blob/main/apps/giocci_pico/README.md#セットアップ)
+> Before flashing, follow the [GiocciPico setup instructions](https://github.com/biyooon-ex/giocci_platform/blob/main/apps/giocci_pico/README.md#Usage)
 > to prepare an AtomVM build with zenoh-pico and place `avm_deps` in the project.
 > Change `/dev/ttyACM0` to your device's serial port, then run `mix flash`
 > to package and flash the sample to an ESP32.
@@ -81,4 +81,3 @@ Before running the sample, use the `:esp.nvs_put_binary/3` examples in the file
 to save your Wi-Fi SSID and password on the device.
 Also, change the Zenoh router endpoint and relay name to match your environment.
 If you put your SSID or password in the source code, do not commit them.
-
